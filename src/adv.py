@@ -57,7 +57,7 @@ player1 = Player("Pablo", "outside")
 
 
 while True:
-    print("\n \n ------------------------ \n")
+    print("------------------------ \n")
     print("Enter 'n' to move North")
     print("Enter 's' to move South")
     print("Enter 'e' to move East")
@@ -72,11 +72,20 @@ while True:
     wrap = room[player1.location].args
     for desc in wrap:
         print(f" - {desc}")
-
+        player1.location = "foyer"
     print("-------------------- \n \n")
     next_move = input("Where to next? \n \n")
 
     if next_move is "n":
         print("You have moved North!")
-    
-    break
+        
+    if next_move is "s":
+        print("You have moved South!")
+    if next_move is "e":
+        print("You have moved East!")
+    if next_move is "w":
+        print("You have moved West!")
+    if next_move is "q":
+        print("Goodbye!")
+        break
+
