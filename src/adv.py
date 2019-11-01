@@ -74,8 +74,11 @@ def print_instructions():
 
 while True:
     print_instructions()
-    #print(f"** You are currently {player1.location} **")
     print(player1.location)
+    print("Items in current location: ")
+    for item in player1.location.items:
+        print(f"- {item}")
+    #print(f"** You are currently {player1.location} **")
     #print("Location Description:")
 
     #wrap = room[player1.location].args
