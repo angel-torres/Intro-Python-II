@@ -26,9 +26,11 @@ earlier adventurers. The only exit is to the south."""),
 }
 
 room['outside'].items.append(Item("ball", "Big red soccer ball"))
+room['outside'].items.append(Item("matches", "Box of matches"))
 room['foyer'].items.append(Item("hammer", "Thor's hammer"))
 room['overlook'].items.append(Item("book", "An old dusty book"))
 room['narrow'].items.append(Item("pencil", "Yellow pencil"))
+room['narrow'].items.append(Item("telescope", "Professional telescope"))
 room['treasure'].items.append(Item("phone", "IphoneX"))
 
 # Link rooms together
@@ -69,6 +71,8 @@ def print_instructions():
     print("|Enter 'e' to move East   |")
     print("|Enter 'w' to move West   |")
     print("|Enter 'q' to quit        |")
+    print("|Enter 'get [item]' to get|")
+    print("|item                     |")
     print(" ------------------------- ")
 
 
@@ -84,7 +88,7 @@ while True:
     #wrap = room[player1.location].args
     #for desc in wrap:
         #print(f" - {desc}")
-    next_move = input("Where to next? \n")
+    next_move = input("What to next? \n")
     print(next_move)
     if next_move is "n":
         if player1.location.n_to is None:
@@ -110,6 +114,12 @@ while True:
         else:
             player1.location = player1.location.w_to
             print("You have moved West!")
+    elif len(next_move.split(" ")) is 2:
+        #if next_move.split(" ")[0] in player1.location.items
+        print(next_move.split(" ")[1], player1.location.items, "Got the item!")
+        #else:
+            #player1.location = player1.location.w_to
+            #print("You have moved West!")
     elif next_move is "q":
         print("Goodbye!")
         system("clear")
