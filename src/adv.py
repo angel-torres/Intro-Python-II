@@ -1,6 +1,8 @@
 from room import Room
+from item import Item
 from player import Player
 import textwrap
+from os import system
 
 # Declare all the rooms
 
@@ -23,6 +25,11 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+room['outside'].items.append(Item("ball", "Big red soccer ball"))
+room['foyer'].items.append(Item("hammer", "Thor's hammer"))
+room['overlook'].items.append(Item("book", "An old dusty book"))
+room['narrow'].items.append(Item("pencil", "Yellow pencil"))
+room['treasure'].items.append(Item("phone", "IphoneX"))
 
 # Link rooms together
 
@@ -41,7 +48,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-player1 = Player("Pablo", "outside")
+player1 = Player("Pablo", room["outside"])
 
 
 # Write a loop that:
@@ -55,28 +62,59 @@ player1 = Player("Pablo", "outside")
 #
 # If the user enters "q", quit the game.
 
+def print_instructions():
+    print(" _________________________")
+    print("|Enter 'n' to move North  |")
+    print("|Enter 's' to move South  |")
+    print("|Enter 'e' to move East   |")
+    print("|Enter 'w' to move West   |")
+    print("|Enter 'q' to quit        |")
+    print(" ------------------------- ")
+
 
 while True:
-    print("\n \n ------------------------ \n")
-    print("Enter 'n' to move North")
-    print("Enter 's' to move South")
-    print("Enter 'e' to move East")
-    print("Enter 'w' to move West")
-    print("Enter 'q' to quit \n")
-    print(" ------------------------ \n \n")
+    print_instructions()
+    print(player1.location)
+    print("Items in current location: ")
+    for item in player1.location.items:
+        print(f"- {item}")
+    #print(f"** You are currently {player1.location} **")
+    #print("Location Description:")
 
-    print(f"** You are currently {player1.location} ** \n")
-
-    print("\nLocation Description:")
-
-    wrap = room[player1.location].args
-    for desc in wrap:
-        print(f" - {desc}")
-
-    print("-------------------- \n \n")
-    next_move = input("Where to next? \n \n")
-
+    #wrap = room[player1.location].args
+    #for desc in wrap:
+        #print(f" - {desc}")
+    next_move = input("Where to next? \n")
+    print(next_move)
     if next_move is "n":
-        print("You have moved North!")
-    
-    break
+        if player1.location.n_to is None:
+            print("Not a valid direction. Try again.")
+        else:
+            player1.location = player1.location.n_to
+            print("You have moved North")
+    elif next_move is "s":
+        if player1.location.s_to is None:
+            print("Not a valid direction. Try again.")
+        else:
+            player1.location = player1.location.s_to
+            print("You have moved South!")
+    elif next_move is "e":
+        if player1.location is None:
+            print("Not a valid direction. Try again.")
+        else:
+            player1.location = player1.location.e_to
+            print("You have moved East!")
+    elif next_move is "w":
+        if player1.location.w_to is None:
+            print("Not a valid direction. Try again.")
+        else:
+            player1.location = player1.location.w_to
+            print("You have moved West!")
+    elif next_move is "q":
+        print("Goodbye!")
+        system("clear")
+        break
+    else:
+        print("Can't go there! Choose another direction")
+    #rsystem("clear")
+
