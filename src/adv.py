@@ -1,4 +1,5 @@
 from room import Room
+from item import Item
 from player import Player
 import textwrap
 from os import system
@@ -24,6 +25,11 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+room['outside'].items.append(Item("ball", "Big red soccer ball"))
+room['foyer'].items.append(Item("hammer", "Thor's hammer"))
+room['overlook'].items.append(Item("book", "An old dusty book"))
+room['narrow'].items.append(Item("pencil", "Yellow pencil"))
+room['treasure'].items.append(Item("phone", "IphoneX"))
 
 # Link rooms together
 
@@ -107,5 +113,5 @@ while True:
         break
     else:
         print("Can't go there! Choose another direction")
-   # system("clear")
+    #rsystem("clear")
 
