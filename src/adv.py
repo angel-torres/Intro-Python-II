@@ -82,6 +82,9 @@ while True:
     print("Items in current location: ")
     for item in player1.location.items:
         print(f"- {item}")
+    print("Inventory: ")
+    for item in player1.inventory:
+        print(f"- {item}")
     #print(f"** You are currently {player1.location} **")
     #print("Location Description:")
 
