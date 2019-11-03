@@ -26,9 +26,11 @@ earlier adventurers. The only exit is to the south."""),
 }
 
 room['outside'].items.append(Item("ball", "Big red soccer ball"))
+room['outside'].items.append(Item("matches", "Box of matches"))
 room['foyer'].items.append(Item("hammer", "Thor's hammer"))
 room['overlook'].items.append(Item("book", "An old dusty book"))
 room['narrow'].items.append(Item("pencil", "Yellow pencil"))
+room['narrow'].items.append(Item("telescope", "Professional telescope"))
 room['treasure'].items.append(Item("phone", "IphoneX"))
 
 # Link rooms together
@@ -69,6 +71,8 @@ def print_instructions():
     print("|Enter 'e' to move East   |")
     print("|Enter 'w' to move West   |")
     print("|Enter 'q' to quit        |")
+    print("|Enter 'get [item]' to get|")
+    print("|item                     |")
     print(" ------------------------- ")
 
 
@@ -78,14 +82,16 @@ while True:
     print("Items in current location: ")
     for item in player1.location.items:
         print(f"- {item}")
+    print("Inventory: ")
+    for item in player1.inventory:
+        print(f"- {item}")
     #print(f"** You are currently {player1.location} **")
     #print("Location Description:")
 
     #wrap = room[player1.location].args
     #for desc in wrap:
-        #print(f" - {desc}")
-    next_move = input("Where to next? \n")
-    print(next_move)
+    #print(f" - {desc}")
+    next_move = input("What to next? ") 
     if next_move is "n":
         if player1.location.n_to is None:
             print("Not a valid direction. Try again.")
@@ -110,6 +116,14 @@ while True:
         else:
             player1.location = player1.location.w_to
             print("You have moved West!")
+    elif len(next_move.split(" ")) is 2:
+        if next_move.split(" ")[0] == "get":
+            for item in player1.location.items:
+                if item.name == next_move.split(" ")[1]:
+                    player1.inventory.append(item)
+                    print(player1.inventory[0], "Got the item!")
+        else:
+            print("Type 'get [item name]' to get item")
     elif next_move is "q":
         print("Goodbye!")
         system("clear")
