@@ -87,9 +87,8 @@ while True:
 
     #wrap = room[player1.location].args
     #for desc in wrap:
-        #print(f" - {desc}")
-    next_move = input("What to next? \n")
-    print(next_move)
+    #print(f" - {desc}")
+    next_move = input("What to next? ") 
     if next_move is "n":
         if player1.location.n_to is None:
             print("Not a valid direction. Try again.")
@@ -115,11 +114,13 @@ while True:
             player1.location = player1.location.w_to
             print("You have moved West!")
     elif len(next_move.split(" ")) is 2:
-        #if next_move.split(" ")[0] in player1.location.items
-        print(next_move.split(" ")[1], player1.location.items, "Got the item!")
-        #else:
-            #player1.location = player1.location.w_to
-            #print("You have moved West!")
+        if next_move.split(" ")[0] == "get":
+            for item in player1.location.items:
+                if item.name == next_move.split(" ")[1]:
+                    player1.inventory.append(item)
+                    print(player1.inventory[0], "Got the item!")
+        else:
+            print("Type 'get [item name]' to get item")
     elif next_move is "q":
         print("Goodbye!")
         system("clear")
