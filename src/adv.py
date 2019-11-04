@@ -121,6 +121,7 @@ while True:
             for item in player1.location.items:
                 if item.name == next_move.split(" ")[1]:
                     player1.inventory.append(item)
+                    player1.location.items.remove(item)
                     print(player1.inventory[0], "Got the item!")
         else:
             print("Type 'get [item name]' to get item")
